@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="title">Produtos</ui:define>
+	
+	<ui:define name="content">
+		
+		<h:form id="frmProduto">
+		
+			<p:commandButton action="#{produtoAction.relatorioProdutos}" ajax="false" value="Imprimir" icon="fa fa-print"  onclick="this.form.target='_blank'"/>
+			
+			<p:dataTable id="tblProduto" value="#{produtoAction.listarProdutos}" var="item"
+				paginator="true" emptyMessage="Nenhum Registro Encontrado."
+				rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+				paginatorAlwaysVisible="false">
+
+				<f:facet name="header">Produto</f:facet>
+				
+				<p:column headerText="Id" sortBy="#{item.id}" styleClass="wids5">
+					<h:outputText value="#{item.id}" />
+				</p:column>
+
+				<p:column headerText="Nome Produto" sortBy="#{item.nome}" styleClass="wids10">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+				
+				<p:column headerText="Preço" sortBy="#{item.preco}" styleClass="wids10">
+					<h:outputText value="#{item.preco}" />
+				</p:column>
+				
+				<p:column headerText="Mercado" sortBy="#{item.mercado.nome}" styleClass="wids10">
+					<h:outputText value="#{item.mercado.nome}" />
+				</p:column>
+
+			</p:dataTable>
+			
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>

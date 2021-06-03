@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Cidades</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="frmCidade">
+		
+			<p:commandButton value="Incluir" icon="fa fa-plus" action="#{cidadeAction.prepararNovo}"  
+							 oncomplete="PF('dlgCidadeNovo').show();"
+							 update="frmdlgNovo:pnlCidadeNovo" />
+			
+			<p:commandButton action="#{cidadeAction.relatorioCidades}" ajax="false" value="Imprimir" icon="fa fa-print"  onclick="this.form.target='_blank'"/>
+
+			<p:dataTable id="tblCidade" value="#{cidadeAction.listaCidades}" var="item"
+				paginator="true" emptyMessage="Nenhum Registro Encontrado."
+				rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+				paginatorAlwaysVisible="false">
+				
+				<f:facet name="header">Cidade</f:facet>
+				
+				<p:column headerText="Id" sortBy="#{item.id}" styleClass="wids5">
+					<h:outputText value="#{item.id}" />
+				</p:column>
+				
+				<p:column headerText="Nome" sortBy="#{item.nome}" styleClass="wids15">
+					<h:outputText value="#{item.nome}" />				
+				</p:column>
+				
+				<p:column headerText="Estado" sortBy="#{item.estado.sigla}" styleClass="wids5">
+					<h:outputText value="#{item.estado.sigla}" />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+		
+		<p:dialog widgetVar="dlgCidadeNovo" header="Incluir Cidade"
+		resizable="false" style="min-width: 300px" >
+			
+			<h:form id="frmdlgNovo">
+				<p:panelGrid id="pnlCidadeNovo" layout="grid" columns="1">
+					
+					<p:outputLabel value="Nome Cidade"/>
+					<p:inputText value="#{cidadeAction.cidade.nome}"/>
+					
+					<p:outputLabel value="Estado"/>
+					<p:inputText value="#{cidadeAction.cidade.estado}"/>
+				
+				</p:panelGrid>
+				
+				<p:commandButton value="Salvar" action="#{cidadeAction.salvarCidade}"
+								 oncomplete="PF('dlgCidadeNovo').hide();" update="frmCidade:tblCidade" icon="fa fa-floppy-o"/>	
+								 
+				<p:commandButton value="Cancelar" onclick="PF('dlgCidadeNovo').hide();" icon="fa fa-times"/>	
+			</h:form>
+			
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

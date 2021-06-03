@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="title">Usuários</ui:define>
+	
+	<ui:define name="content">
+		
+		<h:form id="frmUsuario">
+			
+			<p:dataTable value="#{usuarioFilterBean.listarUsuarios}" var="item"
+				paginator="true" emptyMessage="Nenhum Registro Encontrado."
+				rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+				paginatorAlwaysVisible="false" style="width:100%;">
+
+				<f:facet name="header">Usuários</f:facet>
+				
+				<p:column headerText="Id" sortBy="#{item.id}" styleClass="wids5">
+					<h:outputText value="#{item.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{item.pessoa.nome}" styleClass="wids10">
+					<h:outputText value="#{item.pessoa.nome}" />
+				</p:column>
+				
+				<p:column headerText="Data Cadastro" sortBy="#{item.dataCadastro}" styleClass="wids5">
+					<h:outputText value="#{item.dataCadastro}" />
+				</p:column>
+
+			</p:dataTable>
+					
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+
+	<link rel="shortcut icon" href="resources/img/icon-click.ico" type="image/x-icon" />
+	<h:outputStylesheet name="default.css" library="css" />
+	<h:outputStylesheet name="primefaces.css" library="css" />
+	<h:outputStylesheet name="components.css" library="css" />
+	<h:outputStylesheet name="ddmenu.css" library="css" />
+	<h:outputScript name="ddmenu.js" library="js"/>
+
+	<title>ClickList</title>
+
+</h:head>
+
+<h:body>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="img" name="loading.gif" />
+		</f:facet>
+		<f:facet name="completo">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<h:form>
+		<p:growl autoUpdate="true" showDetail="true" escape="false" life="2000" />
+	</h:form>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north">
+
+			<div class="mainheader">
+				<div style="float: left">
+					<h:link outcome="/home">
+						<h:graphicImage library="img" name="logo-clicklist.png" style="float:left; width: 11%; height: 11%; margin-left:8px;" />
+					</h:link>
+				</div>
+
+				<div style="float: right; margin: 15px auto;" id="formLogin">
+					<span
+						style="float: left; line-height: 28px;">
+						
+						<h:form id="formLogin">
+
+						<p:outputLabel value="Olá, #{usuarioAction.username}"
+							rendered="#{usuarioAction.isLogged()}" style="margin-right: 28px" /> 
+						
+							<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+								<h:graphicImage library="img" name="user.png" rendered="#{usuarioAction.notLogged()}" style="margin-right: 75px; margin-top: 3%;"/>
+							</h:outputLink>
+
+							<p:dialog header="Login" widgetVar="dlg" resizable="false" responsive="true" style="min-width: 300px">
+								<h:panelGrid columns="1" cellpadding="5"
+									style="padding-left: 50px;">
+									<p:inputText id="email" value="#{usuarioAction.usuario.login}" label="Usuário" placeholder="Usuário" />
+
+									<p:password id="senha" value="#{usuarioAction.usuario.senhaCliente}" label="Senha" placeholder="Senha" />
+
+									<f:facet name="footer">
+										<p:commandButton value="Login" process="@all" update="@all" actionListener="#{usuarioAction.logarCliente}" icon="fa fa-sign-in"/>
+										<p:commandButton value="Cancelar" onclick="PF('dlg').hide();" icon="fa fa-times"/>
+									</f:facet>
+								</h:panelGrid>
+								<p:link outcome="/cadastro.xhtml" value="Cadastre-se">
+								</p:link>
+							</p:dialog>
+						</h:form>
+					</span>
+
+					<h:form style="display: inline-block"
+						rendered="#{usuarioAction.isLogged()}">
+						<p:menubar styleClass="menu-sistema">
+							<p:submenu label="Opções">
+								<p:menuitem id="mnUser" value="Usuários" icon="fa fa-user" outcome="/faces/usuario/usuarioFilter.xhtml"/>
+								<p:menuitem id="mnMinhasList" value="Minhas listas" icon="fa fa-list-alt" outcome="/faces/usuario/MinhaLista.xhtml"/>
+								<p:separator />
+
+								<p:menuitem value="Sair" action="#{usuarioAction.logout}" icon="fa fa-sign-out"  process="@all" update="@all">
+									<p:resetInput target="formLogin" />
+								</p:menuitem>
+							</p:submenu>
+						</p:menubar>
+					</h:form>
+				</div>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west">
+			<ui:include src="menu.xhtml" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<h1>
+				<ui:insert name="title">Página vazia</ui:insert>
+			</h1>
+			<ui:insert name="content" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south">
+			<div class="footer-copyright">© 2016 ClickList | Todos os Direitos Reservados</div>
+		</p:layoutUnit>
+
+	</p:layout>
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+			if (args.validationFailed || !args.loggedIn) {
+				PF('dlg').jq.effect("shake", {
+					times : 5
+				}, 100);
+			} else {
+				PF('dlg').hide();
+				$('#loginLink').fadeOut();
+			}
+		}
+	</script>
+
+</h:body>
+
+</html>

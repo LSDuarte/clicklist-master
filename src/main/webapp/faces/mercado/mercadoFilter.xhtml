@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="title">Mercados</ui:define>
+	
+	<ui:define name="content">
+		
+		<h:form id="frmMercado">
+		
+			<p:commandButton value="Incluir" icon="fa fa-plus" action="#{mercadoAction.prepararNovo}"  
+							 oncomplete="PF('dlgMercadoNovo').show();"
+							 update="frmdlgNovo:pnlMercadoNovo" />
+			
+			<p:dataTable id="tblMercado" value="#{mercadoAction.listarMercados}" var="item"
+				paginator="true" emptyMessage="Nenhum Registro Encontrado."
+				rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+				paginatorAlwaysVisible="false" style="width:100%;">
+
+				<f:facet name="header">Mercados</f:facet>
+				
+				<p:column headerText="Id" sortBy="#{item.id}" styleClass="wids5">
+					<h:outputText value="#{item.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{item.nome}" styleClass="wids10">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+				
+<!-- 				<p:column headerText="Opções" width="5px;" colspan="2" > -->
+<!-- 					<p:commandButton icon="fa fa-pencil"/> -->
+					
+<!-- 					<p:outputLabel value=" " /> -->
+<!-- 					<p:commandButton  icon="fa fa-trash-o"/> -->
+<!-- 				</p:column> -->
+
+			</p:dataTable>
+			
+		</h:form>
+		
+		<p:dialog widgetVar="dlgMercadoNovo" header="Incluir Mercado"
+			resizable="false" style="min-width: 300px" >
+			
+			<h:form id="frmdlgNovo">
+				<p:panelGrid id="pnlMercadoNovo" layout="grid" columns="1">
+				
+					<p:outputLabel value="Nome Mercado"/>
+					<p:inputText value="#{mercadoAction.mercado.nome}"/>
+
+				</p:panelGrid>
+				
+				<p:commandButton value="Salvar" action="#{mercadoAction.salvarMercado}"
+								  oncomplete="PF('dlgMercadoNovo').hide();" update="frmMercado:tblMercado" icon="fa fa-floppy-o"/>
+								 
+				<p:commandButton value="Cancelar" onclick="PF('dlgMercadoNovo').hide();" icon="fa fa-times"/>	
+			</h:form>
+			
+		</p:dialog>
+		
+	</ui:define>
+	
+</ui:composition>

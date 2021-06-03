@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Minha Lista</ui:define>
+
+	<ui:define name="content">
+		<h:form id="formProdutos">
+		
+			<p:commandButton action="#{minhaListaAction.relatorioMinhaLista}" ajax="false" value="Imprimir" icon="fa fa-print"  onclick="this.form.target='_blank'"/>
+
+			<p:dataTable value="#{minhaListaAction.minhaListaBy}" var="mLista" id="mLista"
+				emptyMessage="Nenhum Registro Encontrado."
+				style="width:99%; text-align: center;">
+
+				<p:column headerText="Codigo da Lista">
+					<h:outputText value="#{mLista.idMinhaLista}" styleClass="wids5"/>
+				</p:column>
+
+				<p:column headerText="Nome da Lista">
+					<h:outputText value="#{mLista.nome}" styleClass="wids5"/>
+				</p:column>
+
+				<p:column headerText="Total da Lista">
+					<h:outputText value="R$ #{mLista.valorTotal}" styleClass="wids5"/>
+				</p:column>
+				
+				<p:column style="width:40px;text-align: center" headerText="Abrir Lista">
+					<p:commandButton oncomplete="PF('dlg1').show()" action="#{minhaListaAction.listaSelecionada(mLista)}"
+					icon="fa fa-pencil-square-o" process="@form" update="@form"/>
+				</p:column>
+				
+				<p:column style="width:40px;text-align: center" headerText="Deletar Lista">
+					<p:commandButton actionListener="#{minhaListaAction.deletarLista(mLista)}"
+					icon="fa-window-minimize" process="@all" update="@all"/>
+				</p:column>
+				
+				
+			</p:dataTable>
+			
+				<p:dialog header="Minha Lista" widgetVar="dlg1" id="dialogProdutos"
+					resizable="false">
+						<p:dataTable var="itensLista"
+							value="#{minhaListaAction.itensDaListaById}">
+							
+							<p:column headerText="Produto">
+								<h:outputText value="#{itensLista.produtos.nome}" />
+							</p:column>
+							
+							<p:column headerText="Preco">
+								<h:outputText value="R$ #{itensLista.produtos.preco}" />
+							</p:column>
+							
+							<p:column headerText="Quantidade">
+								<h:outputText value="#{itensLista.qtd}" />
+							</p:column>
+							
+							<p:column headerText="Total por Produto">
+								<h:outputText value="R$ #{itensLista.total}" />
+							</p:column>
+
+							</p:dataTable>
+							<f:facet name="footer">
+							<p:commandButton value="Ok" icon="fa fa-check" process="@parent" update="@form"/>
+							</f:facet>
+				</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

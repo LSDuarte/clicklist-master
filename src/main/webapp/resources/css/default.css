@@ -1,0 +1,108 @@
+@CHARSET "utf-8";
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+	background: #fafafa;
+}
+
+#mainMenu {
+	top: 36px;
+	margin-left: 5px;
+	border: 2px solid #dddddd !important;
+	border-top: 0px !important;
+}
+
+h1 {
+	text-align: center;
+	color: #576863;
+	font-weight: 300;
+	font-size: 2em;
+}
+
+h3 {
+	color: #576863;
+	font-weight: 300;
+	font-size: 2.5em;
+	padding-top: 10px;
+}
+
+.mainheader {
+	padding: 5px 0px;
+	margin-top: -5px;
+	margin-bottom: 20px;
+	height: 67px;
+	background-color: #72bb19 !important;
+	color: #fff;
+	width: 100%;
+}
+
+.ajax-status {
+	position: fixed;
+	bottom: 55px;
+	left: 10px;
+	width: 35px;
+	height: 35px;
+}
+
+/* CSS Footer */
+.footer-copyright {
+	padding: 0px 8px;
+	margin-bottom: 10px;
+	height: 20px !important;
+	text-align: center !important;
+}
+
+/*Tamanhos fixos dataTable*/
+.wids5 {
+	width: 5%;
+	text-align: center;
+}
+
+.wids10 {
+	width: 10%;
+}
+
+.wids15 {
+	width: 15%;
+}
+
+.fromTo {
+	font-size: 16px;
+	color: #828383;
+	vertical-align: bottom;
+	line-height: 4px;
+	padding-bottom: 4px;
+	display: block;
+}
+
+.value {
+	height: 13px;
+	font-size: 16px;
+	font-weight: normal !important;
+	text-align: top;
+	line-height: 16px;
+	color: #828383;
+}
+
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  height: 150px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.30), 0 1px 2px rgba(0,0,0,0.28);
+  transition: all 0.3s cubic-bezier(.28,.8,.27,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 18px 29px rgba(0,0,0,0.35), 0 12px 12px rgba(0,0,0,0.28);
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14790030481560" configfile="/clicklist-master/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" id="pf14790031181856" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" outlinks="pf14790031181857" inlinks="pf14790031181857" path="/home.xhtml"/>
+  <links id="pf14790031181857" target="pf14790031181856" source="pf14790031181856" outcome="home"/>
+</pageflow:Pageflow>

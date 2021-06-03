@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Crie Sua Lista</ui:define>
+
+	<ui:define name="content">
+		<h:form id="formProdutos">
+
+			<p:layout style="min-width:400px;min-height:750px;">
+				<p:layoutUnit position="north" resizable="true" size="50"
+					minSize="40" maxSize="200">
+
+					<nav id="ddmenu">
+						<div class="menu-icon"></div>
+						<ul>
+							<li class="full-width"><span class="top-heading">Limpeza</span>
+								<i class="caret"></i>
+								<div class="dropdown">
+									<div class="dd-inner">
+										<ul class="column">
+											<li><h3>Limpeza</h3></li>
+											<li><a href="#">Cozinha</a></li>
+											<li><a href="#">Álcool e removedor</a></li>
+											<li><a href="#">Descartáveis</a></li>
+											<li><a href="#">Inseticidas</a></li>
+											<li><a href="#">Utensílios para limpeza</a></li>
+											<li><a href="#">Desodorizador e Aromatizantes</a></li>
+											<li><a href="#">Lustra móveis e cia</a></li>
+											<li><a href="#">Casa em geral</a></li>
+										</ul>
+									</div>
+								</div></li>
+
+							<li class="full-width"><span class="top-heading">Bebidas</span>
+								<i class="caret"></i>
+								<div class="dropdown">
+									<div class="dd-inner">
+										<ul class="column">
+											<li><h3>Bebidas</h3></li>
+											<li><a href="#">Vodka, Cachaças e Saquês</a></li>
+											<li><a href="#">Achocolatados, Bebidas Lácteas e de
+													Soja</a></li>
+											<li><a href="#">Águas</a></li>
+											<li><a href="#">Vinhos e Espumantes</a></li>
+											<li><a href="#">Refrigerantes</a></li>
+											<li><a href="#">Whiskies e Destilados</a></li>
+											<li><a href="#">Cervejas</a></li>
+											<li><a href="#">Energéticos</a></li>
+											<li><a href="#">Cafés</a></li>
+										</ul>
+									</div>
+								</div></li>
+						</ul>
+					</nav>
+					<p:commandButton value="Finalizar Lista" type="button"
+						onclick="PF('dlg1').show();" />
+
+				</p:layoutUnit>
+
+				<p:dialog header="Finalizando sua lista" widgetVar="dlg1"
+					resizable="false">
+						<p:inputText value="#{produtoAction.minhaLista.nome}"
+							placeholder="Nome da Lista" />
+						<p:dataTable var="listaProduto"
+							value="#{produtoAction.produtoSelecionado}">
+							<p:column headerText="Produto">
+								<h:outputText value="#{listaProduto.nome}" />
+							</p:column>
+
+							<p:column headerText="Quantidade">
+								<h:outputText value="#{listaProduto.total / listaProduto.preco}" />
+							</p:column>
+
+							<p:column headerText="Preco Unitario">
+								<h:outputText value="#{listaProduto.preco}" />
+							</p:column>
+
+							<p:column headerText="Total Únitario">
+								<h:outputText value="#{listaProduto.total}" />
+							</p:column>
+							
+							<p:column headerText="Tirar Produto">
+								<p:commandButton actionListener="#{produtoAction.removeProdutoLista(listaProduto)}"
+								icon="fa-window-minimize" process="@form" update="@form"/>
+							</p:column>
+							
+						</p:dataTable>
+						<p:inputText value="Total #{produtoAction.soma}" disabled="true" />
+						<f:facet name="footer">
+							<p:commandButton value="Salvar Lista" icon="fa fa-check" process="@parent" update="@form"
+							actionListener="#{produtoAction.finalizarLista()}" />
+						</f:facet>
+				</p:dialog>
+
+
+				<p:layoutUnit position="center">
+					<p:spacer></p:spacer>
+					<p:dataGrid var="produto" value="#{produtoAction.produtos}"
+						columns="4" layout="grid" rows="8" paginator="true" id="produtos"
+						paginatorTemplate="{PreviousPageLink} {NextPageLink} ">
+
+						<p:panel style="text-align:center">
+
+							<h:panelGrid columns="1" style="width:100%">
+
+								<p:graphicImage value="../../resources/img/produtos/arroz.jpg"
+									library="produtos" style="width:100px; height: 100px" />
+
+								<h:outputText value="#{produto.nome}"
+									style="text-align: center; color: #576863; font-weight: 300; font-size: 1.5em;" />
+								<p:separator></p:separator>
+
+								<span class="fromTo">Por:</span>
+								<h:outputText styleClass="value" value="R$ #{produto.preco}" />
+
+								<p:separator></p:separator>
+
+							</h:panelGrid>
+							<h:panelGrid columns="2" style="width:100%">
+								<p:spinner id="minMax" value="#{produto.quantidade}" min="0" />
+								<p:commandButton icon="fa fa-cart-plus" process="@form"
+									update="@form"
+									style="border-radius: 100px !important; width: 25%; height: 107%;"
+									action="#{produtoAction.adicionaLista(produto)}" />
+							</h:panelGrid>
+						</p:panel>
+					</p:dataGrid>
+				</p:layoutUnit>
+			</p:layout>
+		</h:form>
+	</ui:define>
+</ui:composition>

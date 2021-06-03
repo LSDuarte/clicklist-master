@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Estados</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="frmEstado">
+
+			<p:commandButton value="Incluir" icon="fa fa-plus" action="#{estadoAction.prepararNovo}"  
+							 oncomplete="PF('dlgEstadoNovo').show();"
+							 update="frmdlgNovo:pnlEstadoNovo" />
+							 
+			<p:commandButton action="#{estadoAction.relatorioEstado}" ajax="false" value="Imprimir" icon="fa fa-print"  onclick="this.form.target='_blank'"/>
+
+			<p:dataTable var="item" id="tblEstado" value="#{estadoAction.listarEstados}"
+				paginator="true" emptyMessage="Nenhum Registro Encontrado."
+				rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+				paginatorAlwaysVisible="false" style="width:100%;">
+
+				<f:facet name="header">Estado</f:facet>
+				
+				<p:column headerText="Nome" sortBy="#{item.nome}" styleClass="wids15">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+
+				<p:column headerText="Sigla" styleClass="wids5">
+					<h:outputText value="#{item.sigla}" />
+				</p:column>
+				
+<!-- 				<p:column headerText="Opções" width="5px;" colspan="2" > -->
+<!-- 					<p:commandButton icon="fa fa-pencil" oncomplete="PF('dlgEstadoNovo').show();" -->
+<!-- 									 update="frmEstado:tblEstado" action="#{estadoAction.editarEstado}"> -->
+<!-- 						<f:attribute name="estadoSelecionado" value="#{estadoAction.estado}"/> -->
+<!-- 					</p:commandButton> -->
+					
+<!-- 					<p:outputLabel value=" " /> -->
+<!-- 					<p:commandButton action="#{estadoAction.excluirEstado}" update="frmEstado:tblEstado" icon="fa fa-trash-o"> -->
+<!-- 						<p:confirm header="Confirmação" message="Deseja Excluir?" icon="fa fa-exclamation-triangle"/> -->
+<!-- 						<f:attribute name="estadoSelecionado" value="#{estadoAction.estado}"/> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+				
+			</p:dataTable>
+			
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</h:form>
+		
+		<p:dialog widgetVar="dlgEstadoNovo" header="Incluir Estado"
+		resizable="false" style="min-width: 300px" >
+			
+			<h:form id="frmdlgNovo">
+				<p:panelGrid id="pnlEstadoNovo" layout="grid" columns="1">
+					
+					<p:outputLabel value="Nome Estado"/>
+					<p:inputText value="#{estadoAction.estado.nome}"/>
+				
+					<p:outputLabel value="Sigla"/>
+					<p:inputText value="#{estadoAction.estado.sigla}" maxlength="2"/>
+
+				</p:panelGrid>
+				
+				<p:commandButton value="Salvar" action="#{estadoAction.salvarEstado}"
+								 oncomplete="PF('dlgEstadoNovo').hide();" update="frmEstado:tblEstado" icon="fa fa-floppy-o"/>	
+								 
+				<p:commandButton value="Cancelar" onclick="PF('dlgEstadoNovo').hide();" icon="fa fa-times"/>	
+			</h:form>
+			
+		</p:dialog>
+		
+	</ui:define>
+
+</ui:composition>

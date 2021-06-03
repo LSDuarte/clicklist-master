@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+	
+	<f:metadata>
+		<f:viewAction action="#{dashboardBean.init}" immediate="true" />
+	</f:metadata>
+	
+	<ui:define name="title">Dashboard</ui:define>
+	
+	<ui:define name="content">
+		
+		<h:form id="frmHome">
+		
+			<p:panelGrid layout="grid" columns="2" columnClasses="left,right" style="width:80%">
+
+				<h:panelGroup>
+	 				<div class="card card-1">
+		 				 <div style="text-align: center; top: 15px;">
+							<h:outputText value="Qnt Produtos" style="text-align: left; font-size: 16px;"/>
+							<h:outputText value=" " />
+		 				 </div>
+						<div style="text-align: center; top: 15px;">
+							<h:outputText value="12" style="text-align: left; font-size: 25px;" />
+							<h:outputText value=" " />
+						</div>	
+		 				 <div style="text-align: center; top: 15px;">
+							<h:outputText value=" " />
+						</div>	
+							
+						 <div style="text-align: center; top: 15px;">
+							<h:outputText value="Valor" style="text-align: left; font-size: 16px;"/>
+							<h:outputText value=" " />
+						 </div>					
+						 <div style="text-align: center; top: 15px;">
+							<h:outputText value="R$ 23,55" style="text-align: left; font-size: 25px;" />
+						 </div>	
+					</div>	
+				
+					
+					<div class="card card-1">
+						 <div style="text-align: center; top: 15px;">
+							<h:outputText value="Qnt Lista" style="text-align: left; font-size: 16px;"/>
+							<h:outputText value=" " />
+						 </div>
+						<div style="text-align: center; top: 15px;">
+							<h:outputText value="3" style="text-align: left; font-size: 25px;" />
+							<h:outputText value=" " />
+						</div>	
+						
+						 <div style="text-align: center; top: 15px;">
+							<h:outputText value=" " />
+						</div>	
+						
+						 <div style="text-align: center; top: 15px;">
+							<h:outputText value="Valor" style="text-align: left; font-size: 16px;"/>
+							<h:outputText value=" " />
+						 </div>					
+						<div style="text-align: center; top: 15px;">
+							<h:outputText value="R$ 23,55" style="text-align: left; font-size: 25px;"/>
+						</div>
+					</div>
+				</h:panelGroup>
+			
+				<p:chart type="line" model="#{dashboardBean.produto}" style="width:600px;" responsive="true" />
+			
+			</p:panelGrid>
+			
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>

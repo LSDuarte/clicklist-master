@@ -1,0 +1,90 @@
+@import url(http://fonts.googleapis.com/css?family=Tenor+Sans);
+
+html {
+	font-family: "Tenor Sans", sans-serif;
+	background-image: url("../img/back.jpg");
+}
+
+.container {
+	width: 500px;
+	height: 400px;
+	margin: 0 auto;
+}
+
+.login {
+	margin-top: 50px;
+	width: 450px;
+}
+
+.login-heading {
+	font: 1.8em/48px "Tenor Sans", sans-serif;
+	color: white;
+}
+
+.input-txt {
+	width: 100%;
+	padding: 20px 10px;
+	background-color: #fafafa;
+	color: #3e6d0a;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-transition: background-color 0.5s ease-in-out;
+	-o-transition: background-color 0.5s ease-in-out;
+	-webkit-transition: background-color 0.5s ease-in-out;
+	transition: background-color 0.5s ease-in-out;
+	margin-bottom: 2px;
+	font-size: 1.1em;
+	border-radius: 14px;
+}
+
+.input-txt:-moz-placeholder {
+	color: #3e6d0a;
+}
+
+.input-txt:-ms-input-placeholder {
+	color: #3e6d0a;
+}
+
+.input-txt::-webkit-input-placeholder {
+	color: #3e6d0a;
+}
+
+.input-txt:focus {
+	background-color: #e5e5e5;
+}
+
+.btn {
+	padding: 7px 20px;
+	border: none;
+	background: white;
+	color: #3e6d0a;
+}
+
+.btn--right {
+	float: right;
+}
+
+.btn--margintop {
+	margin-top: 5px;
+}
+
+.btn--center {
+	float: none;
+}
+
+.icon {
+	display: inline-block;
+}
+
+.icon--min {
+	font-size: .9em;
+}
+
+.lnk {
+	font-size: .8em;
+	line-height: 3em;
+	color: white;
+	text-decoration: none;
+}
+
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>ClickList - Login</title>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+	<link rel="stylesheet" href="resources/css/style.css" />
+	<link rel="shortcut icon" href="resources/img/icon-click.ico"
+		type="image/x-icon" />
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="login">
+
+			<h:panelGrid columns="1">
+
+				<p:commandButton type="button" value="Voltar" process="@all"
+					update="@all" onclick="javascript:history.back();history.go(0);"
+					styleClass="btn btn--right" style="margin-botton: 3%;" />
+
+				<h:form id="formCadastro" style="margin-top: 3%;">
+
+					<p:inputText required="true" placeholder="Nome"
+						styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.nome}" />
+
+					<p:inputMask required="true" placeholder="CPF"
+						mask="999.999.999-99" styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.cpf}" />
+
+					<p:inputMask mask="99/99/9999" required="true"
+						placeholder="Data de Nascimento" styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.dataNascimento}" />
+
+					<h:selectOneMenu styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.sexo}">
+						<f:selectItem itemLabel="Selecione" itemValue="Selecione" />
+						<f:selectItems value="#{fabricaEnum.listarSexo}" />
+					</h:selectOneMenu>
+
+					<p:inputText name="email" required="true" placeholder="Email"
+						styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.email}" />
+
+					<p:inputText name="bairro" required="true" placeholder="Bairro"
+						styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.bairro}" />
+
+					<p:inputText name="cidade" required="true" placeholder="Cidade"
+						styleClass="input-txt"
+						value="#{usuarioAction.usuario.pessoa.cidade}" />
+
+					<p:inputText name="usuario" required="true" placeholder="Usuário"
+						styleClass="input-txt" value="#{usuarioAction.usuario.login}" />
+
+					<p:password required="true" styleClass="input-txt"
+						placeholder="Senha" value="#{usuarioAction.usuario.senhaCliente}" />
+
+					<p:commandButton value="Cadastrar" update="formCadastro"
+						style="margin-top: 3%" styleClass="btn btn--right"
+						actionListener="#{usuarioAction.getSalvarCliente}" />
+
+					<p:commandButton value="Limpar Campos" update="formCadastro"
+						process="@this" style="margin-top: 3%" styleClass="btn">
+						<p:resetInput target="formCadastro" />
+					</p:commandButton>
+
+				</h:form>
+			</h:panelGrid>
+
+		</div>
+	</div>
+	<script src="resources/js/index.js"></script>
+
+</h:body>
+</html>

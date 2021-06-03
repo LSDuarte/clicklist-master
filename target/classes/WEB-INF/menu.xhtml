@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="frmMenu" prependId="false" style="margin-top: 27px;">
+
+		<p:menu id="mainMenu">
+
+			<p:submenu id="mnCadastro" label="Cadastro">
+
+				<p:menuitem id="mnLista" value="Criar Lista" icon="fa fa-plus" url="/faces/usuario/UsuarioCriarLista.xhtml"/>
+				<p:menuitem id="mnListaPerso" value="Minhas Listas" icon="fa fa-pencil-square-o" url="/faces/usuario/MinhaLista.xhtml"/>
+
+			</p:submenu>
+			
+			<p:separator/>
+			<p:menuitem id="mnMercado" value="Mercados" icon="fa fa-home" outcome="/faces/mercado/mercadoFilter.xhtml"/>
+			
+			<p:separator/>
+			<p:menuitem id="mnProduto" value="Produtos" icon="fa fa-product-hunt" outcome="/faces/produto/produtoFilter.xhtml"/>
+				
+			<p:separator/>
+			<p:submenu id="mnLocalidades" label="Localidades" >
+			
+				<p:menuitem id="mnCidade" value="Cidade" icon="fa fa-map" outcome="/faces/localidade/cidadeFilter.xhtml" />
+				<p:menuitem id="mnEstado" value="Estado" icon="fa fa-map-marker" outcome="/faces/localidade/estadoFilter.xhtml" />
+				
+			</p:submenu>
+			
+		</p:menu>
+
+	</h:form>
+
+</ui:composition>
